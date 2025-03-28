@@ -1,12 +1,29 @@
+'use client'
+
+import { useState } from 'react'
 import ChatInterface from '@/components/ChatInterface'
+import Sidebar from '@/components/Sidebar'
 
 export default function Home() {
+  const [currentChatId, setCurrentChatId] = useState('1')
+
+  const handleNewChat = () => {
+    // TODO: 实现新建聊天功能
+    console.log('New chat')
+  }
+
+  const handleSelectChat = (id: string) => {
+    setCurrentChatId(id)
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center bg-gray-900">
-      <div className="w-full max-w-4xl p-4">
-        <h1 className="text-3xl font-bold text-center text-white mb-8">AI Chat</h1>
-        <ChatInterface />
+    <div className="flex min-h-screen">
+      <div className="flex-shrink-0">
+        <Sidebar onNewChat={handleNewChat} onSelectChat={handleSelectChat} />
       </div>
-    </main>
+      <div className="flex-1 relative">
+        <ChatInterface chatId={currentChatId} />
+      </div>
+    </div>
   )
 }
